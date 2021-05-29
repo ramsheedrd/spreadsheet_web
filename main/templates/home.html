@@ -1,0 +1,88 @@
+{% load static %}
+{% load widget_tweaks %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>  </title>
+
+    <!-- Halfmoon CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/css/halfmoon-variables.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://unpkg.com/x-data-spreadsheet@1.1.5/dist/xspreadsheet.css">
+
+
+</head>
+<body data-set-preferred-mode-onload="true" class="with-custom-webkit-scrollbars with-custom-css-scrollbars">
+
+
+    <div class="wrapper h-100vh bg-light-lm">
+
+        <div class="sheet_wrapper">
+            <div class="p-10 bg-white d-flex justify-content-between align-items-center">
+                <h5>{{ new_sheet.title }}</h5>
+                <div>
+                    <span class="font-size-16 mr-15">{{ request.user }}</span>
+                    <a href='{% url "logout" %}' class="btn btn-primary">logout </a>
+                </div>
+            </div>
+            <div class="border" id='sheet'>
+
+            </div>
+        </div>
+
+
+        
+        <div class="d-flex m-20 justify-content-between">
+            <div class="saved-sheets d-flex flex-shrink-0">
+                {% for sheet in sheets %}
+                <a class="saved-sheets-box m-10 mr-15
+                {% if request.path == sheet.get_absolute_url %}sheets-active{% endif %}" 
+                    href="{{ sheet.get_absolute_url }}">{{ sheet.title }}</a>
+                {% empty %}
+                    <h3>No Sheets Available</h3>
+                {% endfor %}
+            </div>
+            <div class="m-10">
+                <button id="create-sheet-btn">
+                    Create Sheet
+                </button>
+            </div>
+        </div>
+
+        <div id="new-sheet-dialog" class="w-300 p-20 shadow-lg bg-white">
+            <form action="" method="POST" id="form">
+                {% csrf_token %}
+                <h4>New Sheet</h4>
+                <input id="new-sheet-id" value="{{ new_sheet.id }}" hidden>
+
+                <div class="mb-10">
+                    <label for="new-sheet-name">Title</label>
+                    <input type="text" value="{{ new_sheet.title }}" name="title" class="form-control" id="new-sheet-name">
+                </div>
+                <div class="mb-10">
+                    <label for="new-sheet-rows">Rows</label>
+                    <input type="number" value="{{ rows }}" name="rows" class="form-control" id="new-sheet-rows">
+                </div>
+                <div class="mb-10">
+                    <label for="new-sheet-cols">Cols</label>
+                    <input type="number" value="{{ cols }}" name="cols" class="form-control" id="new-sheet-cols">
+                </div>
+
+                <button class="btn btn-primary" id='create-sheet' type="submit">Create</button>
+                <button class="btn" type="button"  id='close-dialog'>Close</button>
+            </form>
+        </div>
+
+
+       </div>
+
+       <script src="https://unpkg.com/x-data-spreadsheet@1.1.5/dist/xspreadsheet.js"></script>
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" referrerpolicy="no-referrer"></script>
+       <script src="{% static 'js/main.js' %}"></script>
+       
+</body>
+</html>

@@ -1,0 +1,91 @@
+/* form styles */
+
+.h-100vh{
+    height: 100vh;
+}
+
+.p-40{
+    padding: 4rem;
+}
+
+.errorlist{
+    list-style-type: none;
+    margin: 5px 2px;
+    text-align: left;
+}
+
+.errorlist li {
+    color: red;
+    font-size: 12px;
+    margin-bottom: 2px;
+}
+
+.error-field {
+    border: 1px solid red;
+}
+
+input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+color: rgb(65, 65, 65);
+}
+
+
+
+/* spread sheet styles */
+
+.saved-sheets-box{
+    min-width: 150px;
+    height: 50px;
+    border: none;
+    background-color: #fafafa;
+    border-radius: 1rem;
+    color: #616161;
+    box-shadow: 3px 2px 12px #bdbdbd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+}
+
+.sheets-active{
+    background-color: #5c6bc0;
+    color: white;
+}
+
+#create-sheet-btn {
+    width: 100px;
+    height: 50px;
+    border: none;
+    background-color: #43a047;
+    border-radius: 1rem;
+    color: white;
+    font-size: 1.1em;
+    box-shadow: 3px 2px 12px #3a8f3e;
+    font-weight: bold;
+    cursor: pointer;
+
+}
+
+#create-sheet-btn:active, .saved-sheets-box:active{
+    transform: scale(0.95);
+}
+
+body {
+    overflow-x: hidden;
+}
+
+#new-sheet-dialog{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    display: none;
+}
+
+.saved-sheets{
+    max-width: 80vw;
+    overflow-x: scroll;
+}

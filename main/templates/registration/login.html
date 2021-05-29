@@ -1,0 +1,47 @@
+{% load static %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>  </title>
+
+    <!-- Halfmoon CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/css/halfmoon-variables.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+
+
+</head>
+<body data-set-preferred-mode-onload="true" class="with-custom-webkit-scrollbars with-custom-css-scrollbars">
+
+    <div class="wrapper h-100vh d-flex justify-content-center align-items-center bg-light-lm">
+        <form action="" method="POST" class="w-400 mw-full mx-20 p-40 bg-white-lm bg-dark-dm rounded shadow-lg"> <!-- w-400 = width: 40rem (400px), mw-full = max-width: 100% -->
+            <h3>Login</h3>
+            {% csrf_token %}
+            {% with WIDGET_ERROR_CLASS='error-field' WIDGET_REQUIRED_CLASS='required-field' %}
+            {% for fields in form.visible_fields %}
+                <div class="mb-10">
+                    {% render_field fields class="form-control" placeholder=fields.label %}
+                </div>
+            {% endfor %}
+            {% endwith %}
+
+            {% if form.non_field_errors %}
+            <ul class="errorlist">
+                {% for err in form.non_field_errors %}
+                <li>{{ err }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+
+            <input class="btn btn-primary btn-block mb-10" type="submit" value="Login">
+            <a href="{% url 'register' %}">Click here to Register</a>
+          </form>
+    </div>
+
+</body>
+</html>
